@@ -5,13 +5,14 @@ import com.pluralsight.Person;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Program {
     static ArrayList<Person> astronomers = new ArrayList<>();
 
     public static void main(String[] args) {
         loadAstronomers();
-        printAll();
+        //printAll();
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a first or last name to search: ");
@@ -48,15 +49,21 @@ public class Program {
         }
     }
 
+//   public static List<Person> searchByName(String searchName) {
+//        List<Person> matches = new ArrayList<>();
+//        for (Person p : astronomers) {
+//            if (p.getFirstName().equalsIgnoreCase(searchName) || p.getLastname().equalsIgnoreCase(searchName)) {
+//                matches.add(p);
+//            }
+//        }
+//        return matches;
+//    }
     public static List<Person> searchByName(String searchName) {
-        List<Person> matches = new ArrayList<>();
-        for (Person p : astronomers) {
-            if (p.getFirstName().equalsIgnoreCase(searchName) || p.getLastname().equalsIgnoreCase(searchName)) {
-                matches.add(p);
-            }
-        }
-        return matches;
+        return astronomers.stream()
+                .filter(p -> p.getFirstName().equalsIgnoreCase(searchName))
+                .collect(Collectors.toList());
     }
+
 
     public static void printMatches(List<Person> matches, String searchName) {
         System.out.println("\n--- Search Results ---");
@@ -69,14 +76,19 @@ public class Program {
         }
     }
 
+//    public static void printAverageAge() {
+//        int totalAge = 0;
+//        for (Person p : astronomers) {
+//            totalAge += p.getAge();
+//        }
+//        double averageAge = (double) totalAge / astronomers.size();
+//        System.out.println("\n--- Age Statistics ---");
+//        System.out.printf("Average age: %.1f%n", averageAge);
+//    }
     public static void printAverageAge() {
-        int totalAge = 0;
-        for (Person p : astronomers) {
-            totalAge += p.getAge();
-        }
-        double averageAge = (double) totalAge / astronomers.size();
-        System.out.println("\n--- Age Statistics ---");
-        System.out.printf("Average age: %.1f%n", averageAge);
+
+        astronomers.stream()
+
     }
 
     public static void printOldest() {
