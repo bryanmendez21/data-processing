@@ -86,9 +86,7 @@ public class Program {
 //        System.out.printf("Average age: %.1f%n", averageAge);
 //    }
     public static void printAverageAge() {
-
-        astronomers.stream()
-
+        System.out.println("Average Age: " + astronomers.stream().mapToInt(p -> p.getAge()).average().getAsDouble());
     }
 
     public static void printOldest() {
