@@ -3,6 +3,7 @@ package com.pluralsight.streams;
 import com.pluralsight.Person;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -89,15 +90,19 @@ public class Program {
         System.out.println("Average Age: " + astronomers.stream().mapToInt(p -> p.getAge()).average().getAsDouble());
     }
 
+//    public static void printOldest() {
+//        Person oldest = astronomers.get(0);
+//        for (Person p : astronomers) {
+//            if (p.getAge() > oldest.getAge()) {
+//                oldest = p;
+//            }
+//        }
+//        System.out.println("Oldest: " + oldest.getFirstName() + " " + oldest.getLastname()
+//                + " (Age: " + oldest.getAge() + ")");
+//    }
+
     public static void printOldest() {
-        Person oldest = astronomers.get(0);
-        for (Person p : astronomers) {
-            if (p.getAge() > oldest.getAge()) {
-                oldest = p;
-            }
-        }
-        System.out.println("Oldest: " + oldest.getFirstName() + " " + oldest.getLastname()
-                + " (Age: " + oldest.getAge() + ")");
+        System.out.println("Oldest Age: " + astronomers.stream().map(p -> p.getAge()).reduce((a,b )-> Math.max(a,b)).get());
     }
 
     public static void printYoungest() {
